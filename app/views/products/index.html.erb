@@ -1,0 +1,44 @@
+<div class="container text-left">
+  <div class="row" style="width:100%">
+    <div class="col-4">
+      <% @product.each do |product| %>
+      <%= link_to (product) do %>
+      <div class="card" style="width: 18rem;, height: 200px;">
+        <% if product.images.attached? %>
+        <%= image_tag product.images.first, width: "285px" ,height: "270px"%>
+        <% end %>
+        <%end%>
+        <div class="card-body">
+          Name :<%= product.Name %><br>
+          Brand :<%= product.brand %><br>
+          Price :<%= product.price %><br>
+          size :<%=product.size%><br>
+          Details :<%=product.details%><br>
+          Category :<%=product.category%>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <div>
+            <% if current_user && current_user.admin%>
+            <% "Hi, #{current_user.username}" %>
+            <%= link_to raw("<i class=\"icon-search icon-white\">New</i>"), 
+            new_product_path(@product), class: "btn btn-outline-dark"%>
+            <% else %>
+            <%# byebug %>
+              <%= form_with model: @order_item do |f| %>
+                <%= f.hidden_field :product_id, value: product.id %>
+                <%= f.number_field :quantity, value: 1, min: 1%>
+                <%= f.submit "Add To Cart" %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%#= link_to "Add to Cart", cart_item_path(product_id: @product.id), class:"btn btn-danger"%>
+          <%#= link_to "Buy Now", products_path(product_id: product.id),class: "btn btn-success"%> 
+        </div>
+        <br>
+      </div>
+    </div> 
+    <%end%>
+  </div>
+</div>
+</div>

@@ -1,0 +1,15 @@
+<% @profiles.each do |profile| %>
+    <li><a href="<%= profiles_path(profile) %>">
+        <%= profile.first_name%>
+        <%= profile.last_name%>
+        <%= profile.gender%>
+        <%= profile.age%>
+        <%= profile.house_no%>
+        <%= profile.street%>
+        <%= profile.city%>
+        <%= profile.state%>
+        <%= profile.country%>
+        <%= profile.pincode%>
+        </a>
+     </li> 
+  <% end %>

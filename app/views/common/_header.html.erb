@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg bg-dark Sticky top">
+  <a class="navbar-brand text-light font-italic" href="#"><h2><strong>  Fashionzilla </strong></h2></a>
+</nav>
+<nav class="navbar navbar-expand-lg bg-dark Sticky top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          
+           <% if user_signed_in? %>
+          <a class="nav-link active" aria-current="page" href="#"><%="Hi, #{current_user.phone}" %></a>
+          <% end %>
+        </li>
+</ul> 
+
+        </li>
+      </ul>
+    </div>
+    
+
+
+    <% if user_signed_in? %>
+    <% "Hi, #{current_user.username}" %>
+    <%= link_to raw("<i class=\"icon-search icon-white\">Edit Profile</i>"), 
+          edit_profile_path(current_user.profile.id), class: "btn btn-dark"%>
+    
+
+    <%= link_to raw("<i class=\"icon-search icon-white\">Sign Out</i>"), 
+           destroy_user_session_path, method: :delete, class: "btn btn-dark"%>
+    <% else %>
+    
+    <%= button_to 'Login In', new_user_session_path, class: "btn btn-dark" %>
+    <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: "btn btn-dark" %>
+<%end%>
+
+</div>
+  </div>
+</nav>

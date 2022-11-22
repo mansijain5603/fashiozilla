@@ -1,0 +1,35 @@
+<div class="container text-left">
+  <div class="row" style="width:100%">
+    <% @product.each do |product| %>
+    <div class="col-4">
+   
+      <%= link_to (product) do %>
+        <div class="card" style="width: 18rem;, height: 200px;">
+        <% if product.images.attached? %>
+          <%= link_to (image_tag product.images.first, width: "285px" ,height: "300px"),buyer_path(product)%>
+        <% end %>
+      </div>
+      <%end%>
+        <div class="card-body">
+          Name :<%= link_to product.Name,buyer_path(product) %><br>
+        </div>
+
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <%#= link_to "Add to Cart", products_path(product_id: product.id), class:"btn btn-dark"%>
+
+          <%#= link_to "Buy Now", products_path(product_id: product.id),class: "btn btn-dark"%>
+
+          <td>
+            <%=form_for @order_item do |f| %>
+            <%=f.hidden_field :product_id, :value => product.id %>
+            <%=f.number_field :quantity, :value => 1, :min => 1 %>
+            <%= f.sumit "Add to cart" %>
+          <td> 
+        </div><br>
+        </div>
+       <%end%>
+   
+  </div>
+</div>
+
+

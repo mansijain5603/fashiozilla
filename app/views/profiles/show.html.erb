@@ -1,0 +1,17 @@
+
+<p><%= @profile.first_name%></p>
+<p><%= @profile.last_name%></p>
+<p><%= @profile.gender%></p>
+<p><%= @profile.age%></p>
+<p><%= @profile.house_no%></p>
+<p><%= @profile.street%></p>
+<p><%= @profile.city%></p>
+<p><%= @profile.state%></p>
+<p><%= @profile.country%></p>
+<p><%= @profile.pincode%></p>
+
+<div>
+  <%= button_to "Edit", edit_profile_path(@profile) %>
+</div>
+  
+<%= link_to 'Back', products_path%>

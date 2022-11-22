@@ -1,0 +1,16 @@
+<center>
+<%= form_for @rating do |f| %>
+  <div>
+    <%=f.label :description %>
+    <%= f.text_field :description %><br />
+  </div>
+  <div style="display: none">
+    <%= f.label :car_id %><br>
+    <%= f.text_area :car_id, :value => params["car_id"] %>
+  </div> 
+  <div>
+    <%= f.submit %>
+  </div>
+  
+<%end%>
+</center>
