@@ -2,8 +2,16 @@ class ProductsController < ApplicationController
 	before_action :authenticate_user!, except: [:index]
 
 	  def index
-	    @product = Product.all
-	    @order_item = current_order.order_items.new
+	  	if params[:size].present?
+	  		@products = Product.where(size: params[:size])
+	    elsif params[:group_id].present?
+	    	@group = Group.find_by(id: params[:group_id])
+	    	@products = @group.products
+	    else
+	    	@products = Product.all
+	    	#@order_item = current_order.order_items.new
+		end
+
 	  end
 
 	  def show
@@ -15,7 +23,7 @@ class ProductsController < ApplicationController
 	  end
 	  
 	  def create
-	    @product = current_user.products.create(product_params)
+	    @product = current_user.products.new(product_params)
 	    if @product.save
 	      redirect_to products_path
 	    else
@@ -43,8 +51,11 @@ class ProductsController < ApplicationController
 	    	redirect_to root_path
 	  end
 
+	  def all_cart_items
+  	end
+  	
 	  private
 	  def product_params
-	    params.require(:product).permit(:name, :brand, :price, :size, :details, :category, images:[])
+	    params.require(:product).permit(:group_id, :Name, :brand, :price, :size, :details, :category, images:[])
 	  end
  end

@@ -1,27 +1,34 @@
-<center><%= form_for @product do |f| %>
+<%= form_for @product do |f| %>
 
     <div>
-    <%=f.label :Name %>
-    <%= f.text_field :Name %><br />
+    <%=f.label :name %>
+    <%= f.text_field :Name %><br/>
     </div>
 
     <div>
-      <%= f.label :Brand %>
+      <%= f.label :brand %>
       <%= f.select :brand, [['Allen Solly','Allen solly'],['Levis','Levis'],['Louis Vuitton','Louis Vuitton'],['Dolce & Gabbana','Dolce & Gabbana']] %><br />
     </div>
 
     <div>
-    <%=f.label :Price %>
+      <%= f.label :group %>
+      <%= f.select :group_id, options_from_collection_for_select(Group.all, "id", "name") %>
+    </div>
+
+
+    <div>
+    <%=f.label :price %>
+    
     <%= f.text_field :price %><br />
     </div>
     
     <div>
       <%= f.label :size %>
-      <%= f.select :size, [['6','6'],['7','7'],['8','8'],['9','9'],['10','10'],['1C','1C'],['2C','2C'],['3C','3C'],['4C','4C'],['5C','5C']] %><br />
+      <%= f.select :size, [['xs','xs'],['s','s'],['m','m'],['l','l'],['xl','xl'],['xxl','xxl'],['xxxl','xxxl']] %><br />
     </div>
     
     <div>
-    <%=f.label :Details %>
+    <%=f.label :details %>
     <%= f.text_field :details %><br />
     </div>
 
@@ -38,8 +45,5 @@
     <%= f.submit %>
   <% end %>
 
-</center>
-
   
-<%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"), 
-           products_path(@product), class: "btn btn-outline-dark"%>
+<%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"),root_path, class: "btn btn-outline-dark"%>

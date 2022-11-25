@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_074625) do
+ActiveRecord::Schema.define(version: 2022_11_25_122536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 2022_11_22_074625) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.boolean "display", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "total"
@@ -61,6 +69,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_074625) do
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id", "product_id"], name: "coustom_index_name", unique: true
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -85,6 +94,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_074625) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_products_on_group_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -122,6 +133,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_074625) do
     t.datetime "locked_at"
     t.string "unlock_token"
     t.boolean "admin", default: false
+    t.string "uid"
+    t.string "provider"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -135,6 +148,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_074625) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "products", "groups"
   add_foreign_key "products", "users"
   add_foreign_key "profiles", "users"
 end

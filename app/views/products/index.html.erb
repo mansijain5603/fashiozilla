@@ -1,44 +1,44 @@
+<div>
+<div class="d-grid gap-2 d-md-block">
+  <%= select_tag :size , options_for_select(%w[xs s m l xl xxl xxl], params[:size]), :onchange => "window.location.replace('/'+'size'+'/'+this.value);", prompt: "Select  size", class: "btn btn-dark dropdown-toggle", remote: true%>
+</div>
+</div>
+<!-- ALL Group for the display nav bar -->
+<%# Group.all.each do |g| %>
+<%#= link_to g.name, products_path(group_id: g.id) %>
+<%# end %>
+
+<!-- the nav bar -->
+
+<%# Group.where(display: true).each do |g|%>
+<%#= link_to g.name, products_path(group: g.name) %>
+<%# end %>
+
 <div class="container text-left">
   <div class="row" style="width:100%">
+    <% @products.each do |product| %>
     <div class="col-4">
-      <% @product.each do |product| %>
+   
       <%= link_to (product) do %>
-      <div class="card" style="width: 18rem;, height: 200px;">
+        <div class="card" style="width: 16rem;, height: 150px;">
         <% if product.images.attached? %>
-        <%= image_tag product.images.first, width: "285px" ,height: "270px"%>
+          <%= image_tag product.images.first, width: "250px" ,height: "280px"%>
         <% end %>
-        <%end%>
-        <div class="card-body">
-          Name :<%= product.Name %><br>
-          Brand :<%= product.brand %><br>
-          Price :<%= product.price %><br>
-          size :<%=product.size%><br>
-          Details :<%=product.details%><br>
-          Category :<%=product.category%>
-        </div>
-        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-          <div>
-            <% if current_user && current_user.admin%>
-            <% "Hi, #{current_user.username}" %>
-            <%= link_to raw("<i class=\"icon-search icon-white\">New</i>"), 
-            new_product_path(@product), class: "btn btn-outline-dark"%>
-            <% else %>
-            <%# byebug %>
-              <%= form_with model: @order_item do |f| %>
-                <%= f.hidden_field :product_id, value: product.id %>
-                <%= f.number_field :quantity, value: 1, min: 1%>
-                <%= f.submit "Add To Cart" %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <%#= link_to "Add to Cart", cart_item_path(product_id: @product.id), class:"btn btn-danger"%>
-          <%#= link_to "Buy Now", products_path(product_id: product.id),class: "btn btn-success"%> 
-        </div>
-        <br>
       </div>
-    </div> 
-    <%end%>
+      <%end%>
+        <div class="card-body">
+          <h6><%= product.brand %></h6>
+          <%= product.Name %>
+          <h5>PRICE :<%= product.price %> ₹</h5>
+        </div>
+        
+        </div>
+       <%end%>
   </div>
 </div>
-</div>
+<br><br>
+<% if current_user && current_user.admin%>
+  <%= link_to raw("<i class=\"icon-search icon-white\">Create New Product</i>"), 
+           new_product_path, class: "btn btn-outline-dark"%>
+  <%= link_to "new group ", new_group_path ,class: "btn btn-outline-dark"%>
+<%end%>

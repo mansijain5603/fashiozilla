@@ -1,35 +1,66 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order
+  before_action :set_order, only: %i[show edit]
+  def index
+      @order_items = current_user.order.order_items
+      @order_item = OrderItem.new
+  end
 
-  def create
-  	@order_item = @order.order_items.new(order_params)
-    respond_to do |format|
-    if @order.save
-    	format.js
-    session[:order_id] = @order.id
+  def new
+      @order_item = OrderItem.new
+  end 
+
+  def implement
+      @order_items = current_user.order.order_items
+      @product = Product.find(params[:id])
+      @order_item = current_user.order.order_items.create(product: @product)
+      respond_to do |format|
+          if @order_item.save
+              format.js
+          end
+      end
+  end
+
+  def edit
   end
 
   def update
-    @order_item = @order.order_items.find(params[:id])
-    respond_to do |format|
-     if@order_item.update_attributes(order_params)
-    	@order_items = current_order.order_items
-    	format.js
+      @order_item.update(order_items_params)
+      respond_to do |format|
+          if @order_item.update
+              format.js
+          
+          end
+      end
   end
 
   def destroy
-    @order_item = @order.order_items.find(params[:id])
-    @order_item.destroy
-    @order_items = current_order.order_items
+      respond_to do |format|
+          if @order_item.delete
+              format.js
+          end
+      end  
+  end
+
+  def add_product(product)
+    if order_product = self.order_products.find_by_product_id(product.id)
+      order_product.quantity += 1
+      order_product.save
+      order_products
+    else
+      self.order_products.create(:product_id => product.id, :quantity => 1)
+    end
   end
 
   private
 
-  def order_params
-    params.require(:order_item).permit(:product_id, :quantity)
+  def order_items_params
+      params.require(:order_items).permit(:quantity, :product_id)
   end
 
   def set_order
-    @order = current_order
+      # @order_item = OrderItem.find(params[:id])
+      #$order_item_id = $order_item [0][order_item_id]
   end
+
+
 end

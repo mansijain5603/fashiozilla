@@ -1,0 +1,35 @@
+<footer class="bg-dark text-white text-center text-lg-start">
+  <div class="container p-4">
+    <div class="row">
+      <div class="col">
+        <center><h6 class="text-uppercase">Make Money with Us</h6></center>
+        <% if current_user %>
+        <p> SignOut and LogIn through admin <p>
+        <% else %> 
+        <%= button_to 'Log In', new_user_session_path, class: "btn btn-dark" %>
+        <%end%>
+
+      </div>
+
+      <div class="col">
+        <center><h6 class="text-uppercase">Contact Us</h6>
+        <p>address: abc</p>
+        <p>customer care: +91 ..............., +91 ...............</p>
+       
+        </center>
+      </div>
+      <div class="col">
+        <center><h6 class="text-uppercase">FAQ</h6></center>
+      </div>
+
+      <div class="col">
+        <center><h6 class="text-uppercase mb-0">T&C</h6></center>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      © 2023 Copyright:
+      <a class="text-white" href="http://localhost:3000/products">FashionZilla</a>
+    </div>
+</footer>
+</div>

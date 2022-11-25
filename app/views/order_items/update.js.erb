@@ -1,2 +1,5 @@
-$("#cart").html("<%= j render 'cart/cart' %>");
-$("#cart-item").html("<%= j render 'cart/cart_items' %>");
+// $("#CartProductsForm").html("<%= escape_javascript render('cart_items/items')%>");
+
+
+$('#cart').html("<%= escape_javascript(render('carts/cart'))%>");
+$('#cart-item').html("<%= escape_javascript(render('carts/carts_item'))%>");

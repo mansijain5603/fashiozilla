@@ -1,32 +1,52 @@
-<div class="container text-center">
-    <% if @product.images.attached? %>
-    <% @product.images.each do |image| %>
-    <%= image_tag image, width: "200px", height: "220px"%>
-    <% end %>
-    <%end%>
-    <div class="row-2">
-      Name :<%= @product.Name %><br />
-      Brand :<%= @product.brand %><br />
-      Price :<%= @product.price %><br />
-      Size :<%=@product.size%><br />
-      Details :<%=@product.details%><br />
-      Category :<%=@product.category%><br />
+<div class="container">
+  <div class="row">
+    
+    <div class="col-sm">
+      <% if @product.images.attached? %>
+        <% @product.images.each do |image| %>
+        <%= image_tag image, width: "400px", height: "420px"%>
+        <% end %>
+      <%end%>
     </div>
     
-<div>
-  <% if current_user && current_user.admin%>
-    <%= link_to raw("<i class=\"icon-search icon-white\">Edit</i>"), 
+
+    <div class="col-sm">
+      <br>
+      <h3>Name :<%= @product.Name %></h3><br/><br>
+      <h4>Brand :<%= @product.brand %><br />
+      PRICE  :<%= @product.price %> ₹<br />
+      Size :<%=@product.size%><br />
+      Details :<%=@product.details%><br />
+      Category :<%=@product.category%><br /></h4>
+
+      <div>
+      <% if current_user && current_user.admin%>
+      <%= link_to raw("<i class=\"icon-search icon-white\">Edit</i>"), 
       edit_product_path(@product), class: "btn btn-outline-dark"%>
-    <%= link_to raw("<i class=\"icon-search icon-white\">Destroy</i>"), 
+      <%= link_to raw("<i class=\"icon-search icon-white\">Destroy</i>"), 
       products_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-dark"%>
-    <%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"), 
+      <%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"), 
       products_path(@product), class: "btn btn-outline-dark"%>
-  <% else %>
-    <%= link_to raw("<i class=\"icon-search icon-white\">Add to Cart</i>"),cart_item_path(product_id: @product),class: "btn btn-outline-dark"%>
-    
-  <% end %>
+      <%# elsif user_signed_in? && current_user.order.order_items.find_by(product_id: @product.id).present?%>
+        <%#=  link_to "Add to Cart1", order_items_path, class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote: true}%>
+      <% elsif user_signed_in? %>
+       <%= link_to "Add to Cart AJAX", implement_order_item_path(id: @product),method: :post ,class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote:true}, method: :post%>
+      <% else %>
+        <%=  link_to "Add to Cart3",user_session_path, class: "btn btn-primary" %>
+      <% end %>
+        <%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"), 
+        products_path(@product), class: "btn btn-outline-dark"%>
+      </div>
+    </div>
+    <div>
+      <% if user_signed_in? && current_user.order.order_items.find_by(product_id: @product.id).present?%>
+        <%=  link_to "Add to Cart1", order_items_path, class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote:true}%>
+      <% elsif user_signed_in? %>
+       <%= link_to "Add to Cart2", implement_order_item_path(id: @product),method: :post ,class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote:true}, method: :post%>
+      <% else %>
+        <%=  link_to "Add to Cart3",user_session_path, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-  <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-      <%#= link_to "Add to Cart", product_path(product_id: @product.id), class:"btn btn-dark"%> 
-    </div> -->
-</div>
+

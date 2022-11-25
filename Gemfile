@@ -44,8 +44,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem "better_errors"
-  gem "binding_of_caller"
+  # gem "better_errors"
+  # gem "binding_of_caller"
 end
 
 group :test do
@@ -66,3 +66,6 @@ gem 'cocoon'
 gem 'mini_magick'
 gem "letter_opener", group: :development
 gem 'jquery-ui-rails'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'

@@ -1,0 +1,19 @@
+<%= form_for @group do |f| %>
+
+    <div>
+    <%=f.label :name %>
+    <%= f.text_field :name %><br/>
+    </div>
+
+    <div>
+      <%=f.label :description %>
+    <%= f.text_field :description %><br />
+    </div>
+
+    <div>
+    <%=f.label :display %>
+    <%= check_box_tag :display, value: true %>
+    </div>
+
+    <%= f.submit %>
+  <% end %>

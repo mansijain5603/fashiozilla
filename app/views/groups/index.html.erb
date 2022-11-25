@@ -1,0 +1,13 @@
+
+<ul>
+  <% @group.each do |group| %>
+
+      <%= group.name %>
+      <%= group.description %>
+      <%= group.display %>
+  <% end %>
+</ul>
+
+<%= link_to "New Group", new_group_path %>
+<%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"), 
+        products_path(@product), class: "btn btn-outline-dark"%>
