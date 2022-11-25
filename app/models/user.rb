@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates_presence_of :password, :on => :create
   validates_presence_of :email 
   validates_uniqueness_of :email
-  #validates_presence_of :phone, unless: -> { from_omniauth? }
+  validates_presence_of :phone, unless: -> { from_omniauth? }
 
   attr_accessor :login
   # Include default devise modules. Others available are:
@@ -60,11 +60,11 @@ def save_order
     self.create_order
 end
 
-# private
+private
 
-# def from_omniauth?
-#   provider && uid
-# end
+def from_omniauth?
+  provider && uid
+end
 
 end
 
