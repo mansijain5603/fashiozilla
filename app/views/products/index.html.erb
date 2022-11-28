@@ -3,6 +3,8 @@
   <%= select_tag :size , options_for_select(%w[xs s m l xl xxl xxl], params[:size]), :onchange => "window.location.replace('/'+'size'+'/'+this.value);", prompt: "Select  size", class: "btn btn-dark dropdown-toggle", remote: true%>
 </div>
 </div>
+
+
 <!-- ALL Group for the display nav bar -->
 <%# Group.all.each do |g| %>
 <%#= link_to g.name, products_path(group_id: g.id) %>

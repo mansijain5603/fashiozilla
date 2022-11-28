@@ -41,10 +41,8 @@
   <% Group.all.each do |g| %>
       <div class="col-md-4">
         <div class="card h-100">
-          <%= link_to g.name, products_path(group_id: g.id), class: "btn btn-dark" %>
+          <%= link_to g.name, products_path(group_id: g.id), class: "btn btn-light" %>
         </div>
         </div>
   <% end %>
 </div>
-
-

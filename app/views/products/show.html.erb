@@ -29,10 +29,10 @@
       products_path(@product), class: "btn btn-outline-dark"%>
       <%# elsif user_signed_in? && current_user.order.order_items.find_by(product_id: @product.id).present?%>
         <%#=  link_to "Add to Cart1", order_items_path, class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote: true}%>
-      <% elsif user_signed_in? %>
-       <%= link_to "Add to Cart AJAX", implement_order_item_path(id: @product),method: :post ,class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote:true}, method: :post%>
-      <% else %>
-        <%=  link_to "Add to Cart3",user_session_path, class: "btn btn-primary" %>
+      <%# elsif user_signed_in? %>
+       <%#= link_to "Add to Cart AJAX", implement_order_item_path(id: @product),method: :post ,class: "btn btn-primary", data: {bs_target: "#CartForm", bs_toggle: "modal", remote:true}, method: :post%>
+      <%# else %>
+        <%#=  link_to "Add to Cart3",user_session_path, class: "btn btn-primary" %>
       <% end %>
         <%= link_to raw("<i class=\"icon-search icon-white\">Back</i>"), 
         products_path(@product), class: "btn btn-outline-dark"%>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
    get '/users/sign_out' => 'devise/sessions#destroy'     
   end
   
-  
+  get "/size/:size", to: "products#index"
   root'products#index'
   resources :products  
   resources :profiles
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :groups
 
-  get "/size/:size", to: "products#index"
+  
 
 
 end

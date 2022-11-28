@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_create :init_profile  
+  after_create :init_profile , :save_order 
 
   has_one :profile, :dependent => :destroy
   has_many :products, :dependent => :destroy
